@@ -6,7 +6,7 @@
 /*   By: laufarin <laufarin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:06:17 by laufarin          #+#    #+#             */
-/*   Updated: 2024/06/21 20:52:29 by laufarin         ###   ########.fr       */
+/*   Updated: 2024/06/22 17:38:43 by laufarin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	get_map(char *path, t_map_data *info)
 		info->big_str = ft_strjoin_gn(info->big_str, line);
 		free(line);
 		line = get_next_line(info->fd);
-		printf("%s\n", line);
+		if(line != NULL)
+			printf("%s\n", line);
 	}
 	close(info->fd);
 	info->map = ft_split(info->big_str, '\n');

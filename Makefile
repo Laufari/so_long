@@ -6,51 +6,57 @@ YELLOW=\033[1;33m
 
 NAME = so_long
 
-SOURCES = main.c so_long.c general_checker_maps.c checker_maps.c check_file.c safe_malloc.c \
-		fill_map.c
 
+SRCS_SL = main.c so_long.c general_checker_maps.c checker_maps.c check_file.c utils.c \
+		fill_map.c window_handling.c
+OBJS_SL = $(SRCS_SL:.c=.o)
 
-OBJECTS = $(SOURCES:%.c=%.o)
+SRC_DIR	= ./sources
+INC_DIR	= ./
+CC = gcc
+MF = Makefile
 
-CFLAGS = -g -Wall -Werror -Wextra -I./ #-fsanitize=address 
-LDFLAGS = -L ./minilibx-linux -L ./libft
-CC = cc
-RM = rm -f
+NAME = so_long
+LIBFT_PATH = ./libft/libft.a
+SL_HEADER_FILE = $(INC_DIR)/so_long.h
+CFLAGS = -Wall -Wextra -Werror -fPIE
 
-MLX_FLAGS = -L ./minilibx-linux -lXext -lX11 -o $(NAME)
+GFLAGS = -lXext -lX11 -lm -lz -pie
+GPATH = ./mlx
+MLX_PATH = $(GPATH)/libmlx_Linux.a
 
-LIBFT_FLAGS = -L ./libft -lft
+all: $(NAME)
 
-subsistem:
-	make -C ./libft all
-	make -C ./minilibx-linux all
+$(NAME): $(MF) $(LIBFT_PATH) $(MLX_PATH) $(OBJS_SL)
+	$(CC) $(CFLAGS) $(OBJS_SL) $(LIBFT_PATH) $(MLX_PATH) $(GFLAGS) -o $(NAME)
+	@echo  ""
+	@printf "\033[1;32m%s\033[0m\n" "[so_long] Compiled successfully."
 
-%.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
-	@echo "$(YELLOW)Compiling... $(END)$(patsubst $(DIR_BUILD)%,%,$@)"
+%.o: %.c $(SL_HEADER_FILE) $(MF)
+	@printf "\033[1;32m|\033[0m"
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR)
 
-all: subsistem $(NAME)
+$(LIBFT_PATH): .libft
 
-$(MLX):
-	@$(MAKE) -C ./minilibx-linux --no-print-directory
+.libft:
+	@make -s -C ./libft DEBUG=$(DEBUG)
 
-$(LIBFT):
-	@$(MAKE) -C ./libft --no-print-directory
+$(MLX_PATH): .mlx
 
-$(NAME): Makefile $(SOURCES)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(SOURCES) $(LIBFT_FLAGS) -o $(NAME)
-	@echo "$(GREEN)SO_LONG DONE$(END)"
+.mlx:
+	@make -s -C $(GPATH)
 
 clean:
-	@$(RM) $(OBJECTS)
-	@$(MAKE) -C ./libft clean --no-print-directory
-	@$(MAKE) -C ./minilibx-linux clean --no-print-directory
+	@make -s clean -C ./libft
+	@make -s clean -C $(GPATH)
+	@rm -f $(OBJS_SL)
+	@printf "\033[1;31m%s\033[0m\n" "[so_long] Object files cleaned."
 
 fclean: clean
-	@$(RM) $(NAME)
-	@$(MAKE) -C ./libft clean --no-print-directory
-	@$(MAKE) -C ./minilibx-linux clean --no-print-directory
-
+	@make -s fclean -C ./libft
+	@make -s clean -C $(GPATH)
+	@rm -f $(NAME)
+	@printf "\033[1;31m%s\033[0m\n" "[so_long] Cleaned successfully."
 
 re: fclean all
 

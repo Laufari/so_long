@@ -6,21 +6,24 @@
 /*   By: laufarin <laufarin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:48:28 by laufarin          #+#    #+#             */
-/*   Updated: 2024/06/21 21:19:07 by laufarin         ###   ########.fr       */
+/*   Updated: 2024/06/22 18:55:17 by laufarin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "./minilibx-linux/mlx.h"
+# include "./mlx/mlx.h"
 # include "./libft/libft.h"
 # include <stdio.h>
 # include <unistd.h>
 
 typedef struct s_images
 {
-	char	*img;
+	char	*img_p;
+	int		bpp;
+	int		len_p;
+	int		endian;
 	void	*collect;
 	void	*empty;
 	void	*exit;
@@ -28,7 +31,9 @@ typedef struct s_images
 	void	*wall;
 	void	*winner;
 	int		img_width;
-	int		img_heigth;	
+	int		img_heigth;
+	int		i;
+	int		j;
 }	t_images;
 
 typedef struct s_checker
@@ -55,6 +60,7 @@ typedef struct s_map_data
 	void		*left;
 	void		*down;
 	void		*up;
+	void		*img;
 	t_images	*images;
 }	t_map_data;
 
@@ -71,14 +77,21 @@ t_checker	*cpy_map(t_checker *c, t_map_data *info);
 //CHEC_FILE
 
 int			is_ber(char *str);
-void		get_miap(char *path, t_map_data *info);
+void		get_map(char *path, t_map_data *info);
+
+//WINDOW_HANDLING
+
+void	configure_images(t_map_data *info, t_images *img);
+void    setup_game(t_map_data *info, t_images *img);
 
 //MAIN
 
 int			general_checker_maps(t_map_data *info);
 
-//FUNCIONES EXTRAS
+//UTILS
 
-void		*safe_malloc(size_t size);
+char	*free_map(char **map);
+int		error_exit(t_map_data *info);
+void	*safe_malloc(size_t size);
 
 #endif

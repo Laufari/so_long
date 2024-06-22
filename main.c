@@ -6,7 +6,7 @@
 /*   By: laufarin <laufarin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:11:17 by laufarin          #+#    #+#             */
-/*   Updated: 2024/06/21 21:05:03 by laufarin         ###   ########.fr       */
+/*   Updated: 2024/06/22 18:41:06 by laufarin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,19 @@ int	main(int argc, char **argv)
 		printf("hola son dos\n");
 		printf("%d\n", is_ber(argv[1]));
 		get_map(argv[1],info); //lee el fd con el
+		printf("hola aqui 2\n");
 	}
 	else
 		ft_putstr_fd("no valido cantidad arg", 2);
 	c.map_cpy = ft_split(info->big_str, '\n');
 	c.collect_left = info->n_collect + 1;
+
 	check_fill_map(&c, info, info->y , info->x);
 	if (c.collect_left == 0)
 		printf("map is valid\n");
 	else 
 		printf("issue with map\n");
+	setup_game(info, img);
 	free(info);	
 	return (0);
 }
