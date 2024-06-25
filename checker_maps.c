@@ -6,7 +6,7 @@
 /*   By: laufarin <laufarin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 16:53:45 by laufarin          #+#    #+#             */
-/*   Updated: 2024/06/21 20:38:00 by laufarin         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:38:50 by laufarin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ int	map_correct_objects(t_map_data *info)
 		{
 			if (info->map[j][i] == 'P')
 			{
-				info->x = j;
-				info->y = i;
-				printf("player esta en x: %d y:%d\n", j, i);
+				info->player_x = j;
+				info->player_y = i;
+				printf("player esta en player_x: %d player_y:%d\n", j, i);
 				info->player++;
 			}
 			if (info->map[j][i] == 'C')
