@@ -7,7 +7,6 @@ Gráficos con MiniLibX.
 Movimiento con W, A, S, D.
 Soporte para mapas .ber.
 
-
 Cierre con ESC o cruz de ventana.
 
 Instalación
