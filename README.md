@@ -38,5 +38,5 @@ Limpieza
 make clean   # Borra objetos
 make fclean  # Borra objetos y ejecutables
 
-Autor Laura Farina
+Laura Farina
 📧 laufmk@gmail.com | GitHub
