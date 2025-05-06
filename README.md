@@ -1,7 +1,6 @@
 #so_long
 
-
-es un juego 2D en C usando MiniLibX. 
+Es un juego 2D en C usando MiniLibX. 
 El objetivo es recolectar objetos y llegar a la salida evitando obstáculos, con el menor número de movimientos posible.
 
 Características
@@ -39,4 +38,5 @@ make clean   # Borra objetos
 make fclean  # Borra objetos y ejecutables
 
 Laura Farina
+
 📧 laufmk@gmail.com | GitHub
