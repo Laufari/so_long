@@ -1,4 +1,4 @@
-#so_long
+#So_long
 
 Es un juego 2D en C usando MiniLibX. 
 El objetivo es recolectar objetos y llegar a la salida evitando obstáculos, con el menor número de movimientos posible.
